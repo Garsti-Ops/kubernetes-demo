@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reacht-node-deployment
+  labels:
+    app: react-node-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: react-node-app
+  template:
+    spec:
+      imagePullSecrets:
+        - name: docker-registry-key
+      containers:
+        - image: garstiops/garstiges-secret-repo:react-nodejs-1.0
+          imagePullPolicy: Always
+          name: react-node-app
+          ports:
+            - containerPort: 80
